@@ -9,11 +9,11 @@ import time
 import pigpio
 import _433
 
+# Change RX to the GPIO pin being used on the Raspberry Pi
 RX=27
-TX=21
 favorite_things = {}
 
-# define optional callback for received codes.
+# Define optional callback for received codes, handled by _433
 
 def rx_callback(code, bits, gap, t0, t1):
     if code in favorite_things:
@@ -25,7 +25,7 @@ def rx_callback(code, bits, gap, t0, t1):
             favorite_things[code] = new_thing
         
 
-pi = pigpio.pi() # Connect to local Pi.
+pi = pigpio.pi() # Connect to local Pi
 
 rx=_433.rx(pi, gpio=RX, callback=rx_callback)
 
